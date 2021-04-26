@@ -51,5 +51,19 @@ public class ProductServiceImpl implements ProductService {
 		return filteredList;
 	}
 
+	@Override
+	public List<Product> filterpoductByCategory(String categories) {
+		List<Product> products = productDao.findAll();
+		ArrayList<Product> filteredProducts = new ArrayList<Product>();
+		
+		for(Product product : products ) {
+			if(categories == product.getCategories()) {
+				filteredProducts.add(product);
+			}
+		}
+		
+		return filteredProducts;
+	}
+
 	
 }

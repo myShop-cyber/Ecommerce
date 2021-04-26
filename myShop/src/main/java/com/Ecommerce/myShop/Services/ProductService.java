@@ -12,4 +12,6 @@ public interface ProductService {
 	
 	public List<Product> addProduct(Product addCourse);
 	
+	public List<Product> filterpoductByCategory(String categories);
+	
 }
