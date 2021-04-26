@@ -27,6 +27,13 @@ public class ProductController {
 	}
 	
 	@CrossOrigin
+	@GetMapping("/product/{productNumber}")
+	public Product findByProductNumber(@PathVariable String productNumber) {
+		
+		return productService.findByProductNumber(productNumber);
+	}
+	
+	@CrossOrigin
 	@GetMapping("/product/filter/catergoties/{categories}")
 	public List<Product> filterpoductByCategory(@PathVariable String categories) {
 		
@@ -41,6 +48,7 @@ public class ProductController {
 	}
 	
 	
+	@CrossOrigin
 	@PostMapping("/product/add")
 	public List<Product> addProduct(@RequestBody Product product) {
 		

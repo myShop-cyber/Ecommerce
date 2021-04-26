@@ -2,6 +2,7 @@ package com.Ecommerce.myShop.ServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -64,6 +65,20 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		return filteredProducts;
+	}
+
+	@Override
+	public Product findByProductNumber(String productNumber) {
+	   List<Product> products = productDao.findAll();
+	   Product p = null; 
+	   for(Product product : products ) {
+		   String pNumber = product.getProductNumber();
+			if(productNumber.equalsIgnoreCase(pNumber)) {
+				p = product;
+			}
+		   
+		}
+		return p;
 	}
 
 	
