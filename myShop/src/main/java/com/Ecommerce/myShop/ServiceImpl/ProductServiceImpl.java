@@ -57,7 +57,8 @@ public class ProductServiceImpl implements ProductService {
 		ArrayList<Product> filteredProducts = new ArrayList<Product>();
 		
 		for(Product product : products ) {
-			if(categories == product.getCategories()) {
+			String category = product.getCategories().toString();
+			if(categories.equalsIgnoreCase(category)) {
 				filteredProducts.add(product);
 			}
 		}
