@@ -33,6 +33,7 @@ public class ProductController {
 		return productService.filterpoductByCategory(categories);
 	}
 	
+	@CrossOrigin
 	@GetMapping("/product/categories")
 	public List<String> findCategories() {
 		
