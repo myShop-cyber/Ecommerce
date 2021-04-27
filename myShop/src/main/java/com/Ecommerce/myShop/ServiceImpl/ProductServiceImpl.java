@@ -85,11 +85,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findProductBykey(String key) {
 		List<Product> products = productDao.findAll();
 		ArrayList<Product> filteredProducts = new ArrayList<Product>();
-		
+		String SearchKey = key.toLowerCase();
 		 for(Product product : products ) {
 			 if(product.getKeyPair() != null) {
 
-				   if(product.getKeyPair().contains(key)) {
+				   if(product.getKeyPair().contains(SearchKey)) {
 					   filteredProducts.add(product);
 				   }
 				   
