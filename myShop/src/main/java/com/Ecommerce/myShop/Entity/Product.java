@@ -15,6 +15,15 @@ public class Product {
 	private Double price;
 	private String avaliability;
 	private String brand;
+	private String keyPair;
+	
+	
+	public String getKeyPair() {
+		return keyPair;
+	}
+	public void setKeyPair(String keyPair) {
+		this.keyPair = keyPair;
+	}
 	public String getProductNumber() {
 		return productNumber;
 	}

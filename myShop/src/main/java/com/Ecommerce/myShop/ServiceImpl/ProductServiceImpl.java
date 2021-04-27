@@ -81,5 +81,23 @@ public class ProductServiceImpl implements ProductService {
 		return p;
 	}
 
+	@Override
+	public List<Product> findProductBykey(String key) {
+		List<Product> products = productDao.findAll();
+		ArrayList<Product> filteredProducts = new ArrayList<Product>();
+		
+		 for(Product product : products ) {
+			 if(product.getKeyPair() != null) {
+
+				   if(product.getKeyPair().contains(key)) {
+					   filteredProducts.add(product);
+				   }
+				   
+			 }
+			}
+		
+		return filteredProducts;
+	}
+
 	
 }

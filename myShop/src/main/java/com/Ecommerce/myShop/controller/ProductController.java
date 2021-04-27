@@ -41,6 +41,13 @@ public class ProductController {
 	}
 	
 	@CrossOrigin
+	@GetMapping("/product/search/{key}")
+	public List<Product> findProductBykey(@PathVariable String key) {
+		
+		return productService.findProductBykey(key);
+	}
+	
+	@CrossOrigin
 	@GetMapping("/product/categories")
 	public List<String> findCategories() {
 		

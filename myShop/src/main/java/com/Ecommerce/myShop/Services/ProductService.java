@@ -14,6 +14,8 @@ public interface ProductService {
 	
 	public Product findByProductNumber(String productNumber);
 	
+	public List<Product> findProductBykey(String key);
+	
 	public List<Product> filterpoductByCategory(String categories);
 	
 }
