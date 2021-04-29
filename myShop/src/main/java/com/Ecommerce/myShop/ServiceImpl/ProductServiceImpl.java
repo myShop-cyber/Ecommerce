@@ -105,12 +105,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void sendEmail() {
+	public void sendEmail(String name, String message) {
 		 SimpleMailMessage msg = new SimpleMailMessage();
 	        msg.setTo("prasadvikas0557@gmail.com");
 
 	        msg.setSubject("my shop customer query");
-	        msg.setText("need information about your ecommerce site");
+	        msg.setText("name:- "+name +"\nquery:- "+message);
 
 	        javaMailSender.send(msg);
 		

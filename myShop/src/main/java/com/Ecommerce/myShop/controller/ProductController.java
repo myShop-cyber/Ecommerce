@@ -68,9 +68,9 @@ public class ProductController {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/sendemail")
-	public String send() throws AddressException, MessagingException, IOException {
-		productService.sendEmail();
+	@RequestMapping(value = "/sendemail/{name}/{message}")
+	public String send(@PathVariable String name,@PathVariable String message) throws AddressException, MessagingException, IOException {
+		productService.sendEmail(name, message);
 //		sendingEmailApplication.sendEmailWithAttachment();
 	   return "Email sent successfully";   
 	}
