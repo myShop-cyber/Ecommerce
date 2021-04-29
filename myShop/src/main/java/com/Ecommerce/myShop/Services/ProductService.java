@@ -18,4 +18,5 @@ public interface ProductService {
 	
 	public List<Product> filterpoductByCategory(String categories);
 	
+	public void sendEmail();
 }

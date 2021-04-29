@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.Ecommerce.myShop.Dao.ProductDao;
@@ -17,6 +19,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	public ProductDao productDao;
+	
+	@Autowired
+    private JavaMailSender javaMailSender;
 
 	@Override
 	public List<Product> addProduct(Product addCourse) {
@@ -97,6 +102,18 @@ public class ProductServiceImpl implements ProductService {
 			}
 		
 		return filteredProducts;
+	}
+
+	@Override
+	public void sendEmail() {
+		 SimpleMailMessage msg = new SimpleMailMessage();
+	        msg.setTo("prasadvikas0557@gmail.com");
+
+	        msg.setSubject("my shop customer query");
+	        msg.setText("need information about your ecommerce site");
+
+	        javaMailSender.send(msg);
+		
 	}
 
 	
