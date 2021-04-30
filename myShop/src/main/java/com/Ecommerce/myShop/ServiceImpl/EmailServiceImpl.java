@@ -20,8 +20,8 @@ public class EmailServiceImpl  implements EmailService {
 	        msg.setTo("prasadvikas0557@gmail.com");
 
 	        msg.setSubject("my shop customer query");
-	        if(emailQuery.getContactNo() != null) {
-	        	msg.setText("name:- "+emailQuery.getName() + "\nContact no:= "+ emailQuery.getContactNo() +"\nquery:- "+emailQuery.getMessage());
+	        if(emailQuery.getContactNo() != null || emailQuery.getContactNo() != "") {
+	        	msg.setText("name:- "+emailQuery.getName() + "\nContact no:- "+ emailQuery.getContactNo() +"\nquery:- "+emailQuery.getMessage());
 	        }else {
 	        	msg.setText("name:- "+emailQuery.getName()  +"\nquery:- "+emailQuery.getMessage());
 	        }
