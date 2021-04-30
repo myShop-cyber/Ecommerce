@@ -67,13 +67,5 @@ public class ProductController {
 		return productService.addProduct(product);
 	}
 	
-	@CrossOrigin
-	@RequestMapping(value = "/sendemail/{name}/{message}")
-	public String send(@PathVariable String name,@PathVariable String message) throws AddressException, MessagingException, IOException {
-		productService.sendEmail(name, message);
-//		sendingEmailApplication.sendEmailWithAttachment();
-	   return "Email sent successfully";   
-	}
-
 	
 }

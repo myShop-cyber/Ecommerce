@@ -10,7 +10,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.Ecommerce.myShop.Dao.ProductDao;
+import com.Ecommerce.myShop.Dao.JpaDao;
 import com.Ecommerce.myShop.Entity.Product;
 import com.Ecommerce.myShop.Services.ProductService;
 
@@ -18,7 +18,7 @@ import com.Ecommerce.myShop.Services.ProductService;
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
-	public ProductDao productDao;
+	public JpaDao jpaDao;
 	
 	@Autowired
     private JavaMailSender javaMailSender;
@@ -26,21 +26,21 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> addProduct(Product addCourse) {
 		
-		productDao.save(addCourse);
+		jpaDao.save(addCourse);
 		
-		return productDao.findAll();
+		return jpaDao.findAll();
 	}
 
 	@Override
 	public List<Product> findProduct() {
 		// TODO Auto-generated method stub
-		return productDao.findAll();
+		return jpaDao.findAll();
 	}
 
 	@Override
 	public List<String> findCategories() {
 		// TODO Auto-generated method stub
-		List<Product> product = productDao.findAll();
+		List<Product> product = jpaDao.findAll();
 		List <String> li = new ArrayList<String>();
 		for(Product p : product) {
 			li.add(p.getCategories());
@@ -59,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> filterpoductByCategory(String categories) {
-		List<Product> products = productDao.findAll();
+		List<Product> products = jpaDao.findAll();
 		ArrayList<Product> filteredProducts = new ArrayList<Product>();
 		
 		for(Product product : products ) {
@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product findByProductNumber(String productNumber) {
-	   List<Product> products = productDao.findAll();
+	   List<Product> products = jpaDao.findAll();
 	   Product p = null; 
 	   for(Product product : products ) {
 		   String pNumber = product.getProductNumber();
@@ -88,7 +88,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> findProductBykey(String key) {
-		List<Product> products = productDao.findAll();
+		List<Product> products = jpaDao.findAll();
 		ArrayList<Product> filteredProducts = new ArrayList<Product>();
 		String SearchKey = key.toLowerCase();
 		 for(Product product : products ) {
