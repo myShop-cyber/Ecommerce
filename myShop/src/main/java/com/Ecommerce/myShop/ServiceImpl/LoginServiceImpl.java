@@ -17,8 +17,21 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	public loginJpaDao jpaDao;
 	
+	private Boolean checkUSer(Login loginInfo) {
+		Boolean isExistingUser = false;
+		List<Login> list =  jpaDao.findAll();
+		for(Login info : list) {
+			if(info.getEmail().equalsIgnoreCase(loginInfo.getEmail())) {
+				isExistingUser = true;
+			}
+		}
+		return isExistingUser;
+	}
+	
 	@Override
 	public String login(Login loginInfo) {
+		
+		Boolean isExistingUser = this.checkUSer(loginInfo);
 		
 		int min = 100;
 	    int max = 999;
@@ -28,7 +41,9 @@ public class LoginServiceImpl implements LoginService {
 		
 		String message = "";
 		try {
-			jpaDao.save(loginInfo);
+			if(!isExistingUser) {
+				jpaDao.save(loginInfo);	
+			}
 			message = "Logged in Successfully";
 			
 		}
@@ -42,7 +57,6 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public String logout(String email) {
-		Login lg = new Login();
 		List<Login> list =  jpaDao.findAll();
 		
 		for(Login l : list) {
