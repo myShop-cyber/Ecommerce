@@ -10,7 +10,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.Ecommerce.myShop.Dao.JpaDao;
+import com.Ecommerce.myShop.Dao.productJpaDao;
 import com.Ecommerce.myShop.Entity.Product;
 import com.Ecommerce.myShop.Services.ProductService;
 
@@ -18,7 +18,7 @@ import com.Ecommerce.myShop.Services.ProductService;
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
-	public JpaDao jpaDao;
+	public productJpaDao jpaDao;
 	
 	@Autowired
     private JavaMailSender javaMailSender;
