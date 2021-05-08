@@ -29,5 +29,12 @@ public class UserLoginController {
 		return loginService.logout(email);
 	}
 	
+	@CrossOrigin
+	@GetMapping("/getUser/{accesstoken}")
+	public String getUserInfo(@PathVariable String accesstoken) {
+		
+		return loginService.getUser(accesstoken);
+	}
+	
 }
 

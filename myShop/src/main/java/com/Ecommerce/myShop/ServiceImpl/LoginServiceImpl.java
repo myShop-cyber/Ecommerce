@@ -88,12 +88,26 @@ public class LoginServiceImpl implements LoginService {
 		
 		for(Login l : list) {
 			if(l.getEmail().equalsIgnoreCase(email)) {
-				l.setAccessToken("");
+				l.setAccessToken("logout");
 				jpaDao.save(l);
 			}
 		}
 		
 		return "logout successfully";
+	}
+
+	@Override
+	public String getUser(String accessToken) {
+		String email = "";
+		List<Login> list =  jpaDao.findAll();
+		
+		for(Login l : list) {
+			if(l.getAccessToken().equalsIgnoreCase(accessToken)) {
+				email = l.getEmail();
+			}
+		}
+		
+		return email;
 	}
 
 }
