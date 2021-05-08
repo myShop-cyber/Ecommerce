@@ -17,35 +17,59 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	public loginJpaDao jpaDao;
 	
-	private Boolean checkUSer(Login loginInfo) {
-		Boolean isExistingUser = false;
+	private Login checkUSer(Login loginInfo) {
 		List<Login> list =  jpaDao.findAll();
 		for(Login info : list) {
 			if(info.getEmail().equalsIgnoreCase(loginInfo.getEmail())) {
-				isExistingUser = true;
+			  if(!info.getPassword().equalsIgnoreCase(loginInfo.getPassword())) {
+				
+			  }
+				loginInfo.setPassword(info.getPassword());
 			}
 		}
-		return isExistingUser;
+		return loginInfo;
+	}
+	
+	private String checkUSerCredentials(Login loginInfo) {
+		
+		String statusMessage = "";
+		
+		List<Login> list =  jpaDao.findAll();
+		for(Login info : list) {
+			
+			if(info.getEmail().equalsIgnoreCase(loginInfo.getEmail())) {
+			  if(info.getPassword().equalsIgnoreCase(loginInfo.getPassword())) {
+				  
+			  }else {
+				  statusMessage = "invalid password";
+			  }
+			}
+		}
+		return  statusMessage;
 	}
 	
 	@Override
 	public String login(Login loginInfo) {
 		
-		Boolean isExistingUser = this.checkUSer(loginInfo);
+//		if existing user dont update password only update access token
+//		Login info = this.checkUSer(loginInfo);
 		
 		int min = 100;
 	    int max = 999;
 		int int_random = (int)Math.floor(Math.random()*(max-min+1)+min);
-		System.out.println("int random"+ int_random);
-		loginInfo.setAccessToken(int_random);
+
+		
+		String statusMessage = this.checkUSerCredentials(loginInfo);
 		
 		String message = "";
 		try {
-			if(!isExistingUser) {
+			if(statusMessage.equalsIgnoreCase("invalid password")) {
+				message = "invalid password";
+			}else {
+				loginInfo.setAccessToken(int_random);
 				jpaDao.save(loginInfo);	
+				message =   String.valueOf(int_random);
 			}
-			message = "Logged in Successfully";
-			
 		}
 		catch(Exception e)
 		{
