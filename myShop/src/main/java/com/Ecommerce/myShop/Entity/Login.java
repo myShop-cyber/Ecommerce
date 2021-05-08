@@ -10,24 +10,27 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "login", 
-uniqueConstraints = @UniqueConstraint(columnNames = {"accessToken"}))
+//@Table(name = "login", 
+//uniqueConstraints = @UniqueConstraint(columnNames = {"accessToken"}))
 public class Login {
 
   @Id
   private  String email;
   private  String password;
-  private  int accessToken;
+  private  String accessToken;
   
 public String getEmail() {
 	return email;
 }
-public int getAccessToken() {
+
+public String getAccessToken() {
 	return accessToken;
 }
-public void setAccessToken(int accessToken) {
+
+public void setAccessToken(String accessToken) {
 	this.accessToken = accessToken;
 }
+
 public void setEmail(String email) {
 	this.email = email;
 }

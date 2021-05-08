@@ -3,6 +3,7 @@ package com.Ecommerce.myShop.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,8 @@ public class LoginServiceImpl implements LoginService {
 		int min = 100;
 	    int max = 999;
 		int int_random = (int)Math.floor(Math.random()*(max-min+1)+min);
+		
+		UUID uuid = UUID.randomUUID();
 
 		
 		String statusMessage = this.checkUSerCredentials(loginInfo);
@@ -66,9 +69,9 @@ public class LoginServiceImpl implements LoginService {
 			if(statusMessage.equalsIgnoreCase("invalid password")) {
 				message = "invalid password";
 			}else {
-				loginInfo.setAccessToken(int_random);
+				loginInfo.setAccessToken(uuid.toString());
 				jpaDao.save(loginInfo);	
-				message =   String.valueOf(int_random);
+				message =   uuid.toString();
 			}
 		}
 		catch(Exception e)
@@ -85,7 +88,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		for(Login l : list) {
 			if(l.getEmail().equalsIgnoreCase(email)) {
-				l.setAccessToken(0);
+				l.setAccessToken("");
 				jpaDao.save(l);
 			}
 		}
