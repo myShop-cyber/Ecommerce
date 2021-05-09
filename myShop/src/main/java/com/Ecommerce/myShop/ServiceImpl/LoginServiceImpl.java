@@ -71,12 +71,14 @@ public class LoginServiceImpl implements LoginService {
 			if(statusMessage.equalsIgnoreCase("invalid password")) {
 				message = "invalid password";
 			}else {
+				boolean isNewUser = this.checkUSer(loginInfo);
 				loginInfo.setAccessToken(uuid.toString());
-				jpaDao.save(loginInfo);	
 				message =   uuid.toString();
-				if(this.checkUSer(loginInfo)) {
+				jpaDao.save(loginInfo);	
+				if(isNewUser) {
 					emailService.sendEmailAfterRegistration(loginInfo);
 				}
+				
 			}
 		}
 		catch(Exception e)
