@@ -18,17 +18,20 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	public loginJpaDao jpaDao;
 	
-	private Login checkUSer(Login loginInfo) {
+	@Autowired
+	public EmailServiceImpl  emailService;
+	
+	private boolean checkUSer(Login loginInfo) {
+		
+		boolean isNewuser = true;
+		
 		List<Login> list =  jpaDao.findAll();
 		for(Login info : list) {
 			if(info.getEmail().equalsIgnoreCase(loginInfo.getEmail())) {
-			  if(!info.getPassword().equalsIgnoreCase(loginInfo.getPassword())) {
-				
-			  }
-				loginInfo.setPassword(info.getPassword());
+				isNewuser = false;
 			}
 		}
-		return loginInfo;
+		return isNewuser;
 	}
 	
 	private String checkUSerCredentials(Login loginInfo) {
@@ -44,6 +47,8 @@ public class LoginServiceImpl implements LoginService {
 			  }else {
 				  statusMessage = "invalid password";
 			  }
+			}else {
+				
 			}
 		}
 		return  statusMessage;
@@ -55,9 +60,6 @@ public class LoginServiceImpl implements LoginService {
 //		if existing user dont update password only update access token
 //		Login info = this.checkUSer(loginInfo);
 		
-		int min = 100;
-	    int max = 999;
-		int int_random = (int)Math.floor(Math.random()*(max-min+1)+min);
 		
 		UUID uuid = UUID.randomUUID();
 
@@ -72,6 +74,9 @@ public class LoginServiceImpl implements LoginService {
 				loginInfo.setAccessToken(uuid.toString());
 				jpaDao.save(loginInfo);	
 				message =   uuid.toString();
+				if(this.checkUSer(loginInfo)) {
+					emailService.sendEmailAfterRegistration(loginInfo);
+				}
 			}
 		}
 		catch(Exception e)

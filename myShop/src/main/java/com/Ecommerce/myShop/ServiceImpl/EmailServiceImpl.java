@@ -6,6 +6,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.Ecommerce.myShop.Entity.EmailQuery;
+import com.Ecommerce.myShop.Entity.Login;
 import com.Ecommerce.myShop.Services.EmailService;
 
 @Service
@@ -25,6 +26,20 @@ public class EmailServiceImpl  implements EmailService {
 	        }else {
 	        	msg.setText("name:- "+emailQuery.getName()  +"\nquery:- "+emailQuery.getMessage());
 	        }
+	        
+	        javaMailSender.send(msg);
+		
+	}
+	
+	
+	public void sendEmailAfterRegistration(Login loginInfo) {
+		 SimpleMailMessage msg = new SimpleMailMessage();
+	        msg.setTo(loginInfo.getEmail());
+
+	        msg.setSubject("My Shop registration success");
+	       
+	        	msg.setText("Thank you for registration, for any query Please feel free to contact us in (About) section if you need any further information");
+	        
 	        
 	        javaMailSender.send(msg);
 		
