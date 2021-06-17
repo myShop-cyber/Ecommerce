@@ -7,5 +7,7 @@ public interface FavoritesService {
 	public boolean addToFavorites(Favorites favorite);
 	
 	public boolean removeFavorites(String email, String productNumber);
+	  
+	public boolean isFavorites(String email, String productNumber);
 	
 }

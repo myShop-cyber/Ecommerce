@@ -49,4 +49,20 @@ public class FavoritesServiceImpl implements FavoritesService{
 		return res;
 	}
 
+
+	@Override
+	public boolean isFavorites(String email, String productNumber) {
+		boolean res = false;
+		
+		List<Favorites> li = jpaDao.findAll();
+		
+		for(Favorites fav : li) {
+			if(fav.getEmail().equalsIgnoreCase(email)  && fav.getProductId().equalsIgnoreCase(productNumber)) {
+				res = true;
+			}
+		}
+		
+		return res;
+	}
+
 }

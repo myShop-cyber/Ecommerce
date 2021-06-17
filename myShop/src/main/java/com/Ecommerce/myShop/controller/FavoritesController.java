@@ -30,4 +30,11 @@ public class FavoritesController {
 		
 		return favoritesService.removeFavorites(email, productNumber);
 	}
+	
+	@CrossOrigin
+	@GetMapping("/isFavorites/{email}/{productNumber}")
+	public boolean isFavorites(@PathVariable String email,@PathVariable String productNumber) {
+		
+		return favoritesService.isFavorites(email, productNumber);
+	}
 }
