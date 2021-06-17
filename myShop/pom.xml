@@ -26,16 +26,16 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency> 
       <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-     <dependency>
+     <!-- <dependency>
     <groupId>org.postgresql</groupId>
     <artifactId>postgresql</artifactId>
-     </dependency> 
+     </dependency>  -->
      
-   <!--   <dependency>
+      <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency> -->
+		</dependency> 
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
 <dependency>
