@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.Ecommerce.myShop.Dao.favoritesJpaDao;
 import com.Ecommerce.myShop.Entity.Favorites;
+import com.Ecommerce.myShop.Entity.Product;
 import com.Ecommerce.myShop.Services.FavoritesService;
 
 
@@ -63,6 +64,21 @@ public class FavoritesServiceImpl implements FavoritesService{
 		}
 		
 		return res;
+	}
+
+
+	@Override
+	public List<Favorites> favouriteList(String email) {
+		
+		List<Favorites> li = jpaDao.findAll();
+		List<Favorites> favList = new ArrayList<Favorites>();
+		for(Favorites fav : li) {
+			if(fav.getEmail().equalsIgnoreCase(email)) {
+				favList.add(fav);
+			}
+		}
+		
+		return favList;
 	}
 
 }

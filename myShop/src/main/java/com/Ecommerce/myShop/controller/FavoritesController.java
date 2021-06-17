@@ -1,5 +1,7 @@
 package com.Ecommerce.myShop.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Ecommerce.myShop.Entity.Favorites;
+import com.Ecommerce.myShop.Entity.Product;
 import com.Ecommerce.myShop.Services.FavoritesService;
 
 @RestController
@@ -16,6 +19,13 @@ public class FavoritesController {
 
 	@Autowired
 	private FavoritesService favoritesService;
+	
+	@CrossOrigin
+	@GetMapping("/{email}/favouriteList")
+	public List<Favorites> favouriteList(@PathVariable String email) {
+		
+		return favoritesService.favouriteList(email);
+	}
 	
 	@CrossOrigin
 	@PostMapping("/addFavorites")
