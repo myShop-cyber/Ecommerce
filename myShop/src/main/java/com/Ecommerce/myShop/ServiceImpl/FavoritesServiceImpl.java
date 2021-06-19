@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Ecommerce.myShop.Dao.favoritesJpaDao;
+import com.Ecommerce.myShop.Dao.productJpaDao;
 import com.Ecommerce.myShop.Entity.Favorites;
 import com.Ecommerce.myShop.Entity.Product;
 import com.Ecommerce.myShop.Services.FavoritesService;
@@ -17,6 +18,9 @@ public class FavoritesServiceImpl implements FavoritesService{
 
 	@Autowired
 	public favoritesJpaDao jpaDao;
+	
+	@Autowired
+	public productJpaDao productJpaDao;
 	
 	
 	@Override
@@ -68,17 +72,26 @@ public class FavoritesServiceImpl implements FavoritesService{
 
 
 	@Override
-	public List<Favorites> favouriteList(String email) {
+	public List<Product> favouriteList(String email) {
 		
 		List<Favorites> li = jpaDao.findAll();
+		List<Product> pli = productJpaDao.findAll();
+		
 		List<Favorites> favList = new ArrayList<Favorites>();
-		for(Favorites fav : li) {
-			if(fav.getEmail().equalsIgnoreCase(email)) {
-				favList.add(fav);
+		List<Product> productList = new ArrayList<Product>();
+		
+		for(Product product : pli) {
+			for (Favorites fav : li) {
+				if(fav.getEmail().equalsIgnoreCase(email)) {
+					if (fav.getProductId().equalsIgnoreCase(product.getProductNumber())) {
+						productList.add(product);
+					}
+				}
 			}
+		
 		}
 		
-		return favList;
+		return productList;
 	}
 
 }

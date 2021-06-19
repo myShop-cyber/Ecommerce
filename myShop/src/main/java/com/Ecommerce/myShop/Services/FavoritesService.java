@@ -13,6 +13,6 @@ public interface FavoritesService {
 	  
 	public boolean isFavorites(String email, String productNumber);
 	
-	public List<Favorites> favouriteList(String email);
+	public List<Product> favouriteList(String email);
 	
 }

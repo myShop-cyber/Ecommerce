@@ -22,7 +22,7 @@ public class FavoritesController {
 	
 	@CrossOrigin
 	@GetMapping("/{email}/favouriteList")
-	public List<Favorites> favouriteList(@PathVariable String email) {
+	public List<Product> favouriteList(@PathVariable String email) {
 		
 		return favoritesService.favouriteList(email);
 	}
